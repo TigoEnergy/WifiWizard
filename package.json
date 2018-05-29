@@ -1,9 +1,9 @@
 {
-  "name": "wifiwizard",
+  "name": "cordova-plugin-tigowifiwizard",
   "version": "0.2.11",
   "description": "This plugin allows Phonegap applications to manage Wifi connections.",
   "cordova": {
-    "id": "wifiwizard",
+    "id": "cordova-plugin-tigowifiwizard",
     "platforms": [
       "android",
       "ios"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/parsonsmatt/wifiwizard.git"
+    "url": "git+https://github.com/TigoEnergy/WifiWizard.git"
   },
   "keywords": [
     "phonegap",
