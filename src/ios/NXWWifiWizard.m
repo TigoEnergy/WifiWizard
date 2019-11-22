@@ -1,10 +1,24 @@
 #import "NXWWifiWizard.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import <CoreLocation/CoreLocation.h>
 
 @implementation NXWWifiWizard
 
 - (id)fetchSSIDInfo {
     // see http://stackoverflow.com/a/5198968/907720
+    if (@available(iOS 13.0, *)) {
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+            NSLog(@"User has explicitly denied authorization for this application, or location services are disabled in Settings.");
+        } else {
+            CLLocationManager* cllocation = [[CLLocationManager alloc] init];
+            if(![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+                [cllocation requestWhenInUseAuthorization];
+                usleep(500);
+                return [self fetchSSIDInfo];
+            }
+        }
+    }
+
     NSArray *ifs = (__bridge_transfer NSArray *)CNCopySupportedInterfaces();
     NSLog(@"Supported interfaces: %@", ifs);
     NSDictionary *info;
